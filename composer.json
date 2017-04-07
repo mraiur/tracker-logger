@@ -1,0 +1,18 @@
+{
+    "name": "mraiur/sleep-logger",
+    "description": "Log your sleep and wakeup. Next will have a graph display your sleep schedule for the past X days.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nikolay Ivanov",
+            "email": "mraiur@gmail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "^3.8",
+        "monolog/monolog": "^1.22",
+        "slim/php-view": "^2.2",
+        "robmorgan/phinx": "^0.8.0"
+    }
+}
