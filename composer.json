@@ -9,10 +9,20 @@
             "email": "mraiur@gmail.com"
         }
     ],
+    "homepage": "http://blog.mraiur.com/sleep-log",
+    "support": {
+        "issues": "https://github.com/mraiur/sleep-logger/issues",
+        "source": "https://github.com/mraiur/sleep-logger"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src"
+        }
+    },
     "require": {
         "slim/slim": "^3.8",
+        "slim/twig-view": "^2.2",
         "monolog/monolog": "^1.22",
-        "slim/php-view": "^2.2",
         "robmorgan/phinx": "^0.8.0"
     }
 }

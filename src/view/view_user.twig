@@ -1,0 +1,38 @@
+{% extends "layout/default.twig" %}
+
+{% block title %}View user{% endblock %}
+{% block content %}
+	<div class="page view-user-page">
+		<h1>Sleep log</h1>
+		<div class="description">
+			View user : {{ user.getUsername() }}
+		</div>
+
+		<div class="format-log">
+			<div class="header">
+				<div class="label">Date</div>
+				<div class="blocks">
+					{% for block in headers %}
+						<div class="block" style="width: {{ block['width'] }}%; left: {{ block['left'] }}%;" title='{{ block['text'] }}'>
+							{{ block['text'] }}
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+			{% for day, blocks in formatedLog %}
+				<div class="day">
+					<div class="label">{{ day }}</div>
+					<div class="blocks">
+
+						{% for block in blocks %}
+							<div class="block" style="width: {{ block['width'] }}%; left: {{ block['left'] }}%;" title='{{ block['text'] }}'>
+								{{ block['text'] }}
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

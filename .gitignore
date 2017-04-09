@@ -1,4 +1,7 @@
 /vendor/
+/cache/twig
+/public/style/*.css
+/public/style/*.css.map
 /logs/*
 .idea/
 !/logs/README.md
