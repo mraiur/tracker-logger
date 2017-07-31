@@ -36,12 +36,12 @@ class EventCollection extends Collection
 		$user_id = $user->getId();
 		if( $start_date instanceof \DateTime )
 		{
-			$start_date = $this->dateToMysql( $start_date);
+			$start_date = $this->dateToMysql( $start_date, '23:59:00');
 		}
 
 		if( $end_date instanceof \DateTime )
 		{
-			$end_date = $this->dateToMysql($end_date);
+			$end_date = $this->dateToMysql($end_date, '23:59:00');
 		}
 
 		$list = [];
@@ -59,7 +59,7 @@ class EventCollection extends Collection
 			WHERE
 				user_id = :user_id
 			AND
-				event_time < :start_date AND event_time > :end_date
+				event_time > :start_date AND event_time < :end_date
 		  	ORDER BY
 		  		event_time ASC
 			";

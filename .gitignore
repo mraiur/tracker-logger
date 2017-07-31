@@ -6,3 +6,5 @@
 .idea/
 !/logs/README.md
 config/config.local.php
+composer.lock
+public/style/.sass-cache/

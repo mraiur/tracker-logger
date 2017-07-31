@@ -31,18 +31,21 @@ class ViewUserAction
 		$username = $request->getAttribute('username');
 
 		$start_date = \DateTime::createFromFormat('Y-m-d', $request->getAttribute('start_date') );
-		$end_date = \DateTime::createFromFormat('Y-m-d',$request->getAttribute('end_date') );
+		$end_date = \DateTime::createFromFormat('Y-m-d', $request->getAttribute('end_date') );
 
 		if(!$start_date)
 		{
 			$start_date = new \DateTime();
+			$start_date->sub( new \DateInterval('P7D') );
 		}
 
 		if(!$end_date)
 		{
-			$end_date = new \DateTime();
-			$end_date->sub(new \DateInterval('P7D'));
+			$temp = clone $start_date;
+			$end_date = new \DateTime(  $temp->format('Y-m-d')." 23:59:00");
+			$end_date->add(new \DateInterval('P7D'));
 		}
+
 
 		$userCollection = new UserCollection( $this->db );
 		$eventCollection = new EventCollection( $this->db );
@@ -91,7 +94,14 @@ class ViewUserAction
 			}
 		}
 
+		$next_date = clone $start_date;
+		$prev_date = clone $start_date;
+
 		$tplData = [
+			'prev_date' => $prev_date->sub( new \DateInterval('P7D') )->format('Y-m-d'),
+			'next_date' => $next_date->add( new \DateInterval('P7D') )->format('Y-m-d'),
+			'start_date' => $start_date->format('Y-m-d'),
+			'end_date' => $end_date->format('Y-m-d'),
 			'user' => $user,
 			"headers" => $headers,
 			'formatedLog' => $formatedLog

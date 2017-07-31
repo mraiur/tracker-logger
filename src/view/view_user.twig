@@ -3,10 +3,17 @@
 {% block title %}View user{% endblock %}
 {% block content %}
 	<div class="page view-user-page">
-		<h1>Sleep log</h1>
+		<h1><a href="/">Sleep log</a></h1>
 		<div class="description">
-			View user : {{ user.getUsername() }}
+			View user : <a href="/user/{{ user.getUsername() }}">{{ user.getUsername() }}</a> from {{start_date}} to {{end_date}}
 		</div>
+
+		<div class="navigation">
+			<a class="prev" href="/user/{{ user.getUsername() }}/{{ prev_date }}">Previous (<span class="date">{{ prev_date }}</span>)</a>
+			<a class="next" href="/user/{{ user.getUsername() }}/{{ next_date }}">Next (<span class="date">{{ next_date }}</span>)</a>
+			<div class="clear"></div>
+		</div>
+
 
 		<div class="format-log">
 			<div class="header">

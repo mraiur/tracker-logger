@@ -11,8 +11,9 @@ class Collection
 		$this->db = $db;
 	}
 
-	protected function dateToMysql( \DateTime $date )
+	protected function dateToMysql( \DateTime $date, $sufix = "00:00:00" )
 	{
-		return $date->format('Y-m-d H:i:s');
+		$clone = clone $date;
+		return $clone->format('Y-m-d ').$sufix;
 	}
 }
