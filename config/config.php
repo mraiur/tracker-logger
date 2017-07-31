@@ -6,6 +6,7 @@ $config = [
 
 	'mode'              => 'debug',
 	'base_path'         => 'base-web',
+	'host'				=> 'http://localhost',
 
 	// View settings
 	'view' => [
