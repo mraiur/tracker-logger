@@ -1,46 +1,60 @@
 <?php
-require '../vendor/autoload.php';
 
-$config = require("../config/config.php");
+/**
+ * Laravel - A PHP Framework For Web Artisans
+ *
+ * @package  Laravel
+ * @author   Taylor Otwell <taylor@laravel.com>
+ */
 
-$app = new \Slim\App(['settings' => $config ]);
-
-require __DIR__ . '/../config/dependencies.php';
-require __DIR__ . '/../config/routes.php';
-
-
+define('LARAVEL_START', microtime(true));
 
 /*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+|
+| Composer provides a convenient, automatically generated class loader for
+| our application. We just need to utilize it! We'll simply require it
+| into the script here so that we don't have to worry about manual
+| loading any of our classes later on. It feels great to relax.
+|
+*/
 
+require __DIR__.'/../vendor/autoload.php';
 
-$app->post('/track/{log_type}', function(Request $request, Response $response) {
+/*
+|--------------------------------------------------------------------------
+| Turn On The Lights
+|--------------------------------------------------------------------------
+|
+| We need to illuminate PHP development, so let us turn on the lights.
+| This bootstraps the framework and gets it ready for use, then it
+| will load up this application so that we can run it and send
+| the responses back to the browser and delight our users.
+|
+*/
 
-	$data = $request->getParsedBody();
-	$user_token = filter_var($data['user_token'], FILTER_SANITIZE_STRING);
-	$logType = $request->getAttribute('log_type');
+$app = require_once __DIR__.'/../bootstrap/app.php';
 
-	$user = new User($this->db);
-	if( $user->getByToken( $user_token ) && $logType )
-	{
-		$event = new Event($this->db);
-		$event->setEventType( $logType );
-		$event->setUserId( $user->getId() );
+/*
+|--------------------------------------------------------------------------
+| Run The Application
+|--------------------------------------------------------------------------
+|
+| Once we have the application, we can handle the incoming request
+| through the kernel, and send the associated response back to
+| the client's browser allowing them to enjoy the creative
+| and wonderful application we have prepared for them.
+|
+*/
 
-		if( $event->save() )
-		{
-			$response->getBody()->write("saved");
-		}
-		else
-		{
-			$response->getBody()->write("error 1");
-		}
-	}
-	else
-	{
-		$response->getBody()->write("error 2");
-	}
+$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
-	return $response;
-});*/
+$response = $kernel->handle(
+    $request = Illuminate\Http\Request::capture()
+);
 
-$app->run();
+$response->send();
+
+$kernel->terminate($request, $response);

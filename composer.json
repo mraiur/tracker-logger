@@ -1,28 +1,60 @@
 {
-    "name": "mraiur/sleep-logger",
-    "description": "Log your sleep and wakeup. Next will have a graph display your sleep schedule for the past X days.",
-    "type": "project",
+    "name": "laravel/laravel",
+    "description": "The Laravel Framework.",
+    "keywords": ["framework", "laravel"],
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Nikolay Ivanov",
-            "email": "mraiur@gmail.com"
-        }
-    ],
-    "homepage": "http://blog.mraiur.com/sleep-log",
-    "support": {
-        "issues": "https://github.com/mraiur/sleep-logger/issues",
-        "source": "https://github.com/mraiur/sleep-logger"
+    "type": "project",
+    "require": {
+        "php": "^7.1.3",
+        "fideloper/proxy": "^4.0",
+        "laravel/framework": "5.6.*",
+        "laravel/passport": "^6.0",
+        "laravel/tinker": "^1.0"
+    },
+    "require-dev": {
+        "filp/whoops": "^2.0",
+        "fzaninotto/faker": "^1.4",
+        "mockery/mockery": "^1.0",
+        "nunomaduro/collision": "^2.0",
+        "phpunit/phpunit": "^7.0"
     },
     "autoload": {
+        "classmap": [
+            "database/seeds",
+            "database/factories"
+        ],
         "psr-4": {
-            "App\\": "src"
+            "App\\": "app/"
         }
     },
-    "require": {
-        "slim/slim": "^3.8",
-        "slim/twig-view": "^2.2",
-        "monolog/monolog": "^1.22",
-        "robmorgan/phinx": "^0.8.0"
-    }
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+            ]
+        }
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
