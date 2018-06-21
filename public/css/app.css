@@ -10417,16 +10417,13 @@ a.text-dark:focus {
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
-.duration-records .log-date-row {
-  padding-bottom: 4px;
-  height: 36px;
-}
-
+.duration-records .log-date-headers .log-date-header,
 .duration-records .log-date-row .log-date {
   position: relative;
   float: left;
 }
 
+.duration-records .log-date-headers .time-header,
 .duration-records .log-date-row .time {
   position: relative;
   background-color: #cbcac9;
@@ -10434,12 +10431,36 @@ a.text-dark:focus {
   height: 32px;
 }
 
-.duration-records .log-date-row .time .time-duration {
+.duration-records .log-date-headers .time-header .time-duration,
+.duration-records .log-date-headers .time-header .time-duration-header,
+.duration-records .log-date-row .time .time-duration,
+.duration-records .log-date-row .time .time-duration-header {
   position: absolute;
-  background-color: #675aff;
   top: 0;
   height: 32px;
   display: block;
+}
+
+.duration-records .log-date-headers .log-date-header {
+  font-weight: bold;
+}
+
+.duration-records .log-date-headers .time-header {
+  padding: 0;
+}
+
+.duration-records .log-date-headers .time-header .time-duration-header {
+  padding-left: 4px;
+  border-left: solid #000000 1px;
+}
+
+.duration-records .log-date-row {
+  padding-bottom: 4px;
+  height: 36px;
+}
+
+.duration-records .log-date-row .time .time-duration {
+  background-color: #675aff;
 }
 
 .duration-records .log-date-row:after {

@@ -16,29 +16,52 @@
 
 .duration-records
 {
+    .log-date-headers .log-date-header, .log-date-row .log-date{
+        position: relative;
+        float: left;
+    }
 
+    .log-date-headers .time-header, .log-date-row .time{
+        position: relative;
+        background-color: #cbcac9;
+        float: left;
+        height: 32px;
+
+        .time-duration, .time-duration-header{
+            position: absolute;
+            top: 0;
+            height: 32px;
+            display: block;
+        }
+    }
+
+    .log-date-headers{
+        .log-date-header{
+            font-weight: bold;
+        }
+        .time-header{
+            padding: 0;
+            .time-duration-header
+            {
+                padding-left: 4px;
+                border-left: solid #000000 1px;
+            }
+        }
+
+    }
     .log-date-row
     {
         padding-bottom: 4px;
         height: 36px;
         .log-date
         {
-            position: relative;
 
-            float: left;
         }
         .time{
-            position: relative;
-            background-color: #cbcac9;
-            float: left;
-            height: 32px;
+
             .time-duration
             {
-                position: absolute;
                 background-color: #675aff;
-                top: 0;
-                height: 32px;
-                display: block;
             }
         }
 

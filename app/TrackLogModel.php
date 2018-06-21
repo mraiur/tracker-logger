@@ -56,6 +56,7 @@ class TrackLogModel extends Model
                 if( $diffEndOfDay < $duration )
                 {
                     $byDays[$day][] = [
+                        "color" => $eventType->hex_color,
                         "start" => ( $created_at->hour * 60) + $created_at->minute,
                         "duration" => $diffEndOfDay
                     ];
@@ -68,6 +69,7 @@ class TrackLogModel extends Model
                 else
                 {
                     $byDays[$day][] = [
+                        "color" => $eventType->hex_color,
                         "start" => ( $created_at->hour * 60) + $created_at->minute,
                         "duration" => $duration
                     ];

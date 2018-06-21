@@ -18,6 +18,7 @@ class TrackLog extends Migration
             $table->integer('end_event_type_id')->unsigned()->nullable();
             $table->integer('user_id')->unsigned();
             $table->integer('duration')->default(0);
+            $table->string('hex_color')->default("#675aff");
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

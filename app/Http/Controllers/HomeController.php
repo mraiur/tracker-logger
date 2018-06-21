@@ -29,9 +29,7 @@ class HomeController extends Controller
     {
         $start_date = \DateTime::createFromFormat('Y-m-d', $request->get('start_date') );
         $end_date = \DateTime::createFromFormat('Y-m-d', $request->get('end_date') );
-
-        $eventType = EventTypeModel::where('user_id', Auth::id() )->first();
-        $eventType->load('endEvent');
+        $records = [];
 
         if(!$start_date)
         {
@@ -46,9 +44,15 @@ class HomeController extends Controller
             $end_date->add(new \DateInterval('P7D'));
         }
 
-        $records = TrackLogModel::getGroupedByDay($start_date, $end_date, $eventType);
+		$startEvents = EventTypeModel::where('user_id', Auth::id() )->whereNotNull("end_event_type_id")->get();
+        foreach( $startEvents as $startEvent)
+        {
+            $startEvent->load('endEvent');
+            $records = array_merge($records, TrackLogModel::getGroupedByDay($start_date, $end_date, $startEvent));
+        }
+
         return view('home', [
-            'minuteSize' => 100 / (24*60),
+            'minuteSize' => 0.069444444, // 100 / (24*60)
             'records' => $records
         ]);
     }
