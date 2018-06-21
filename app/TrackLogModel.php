@@ -37,15 +37,13 @@ class TrackLogModel extends Model
         {
             $duration = $item->duration;
             $created_at = $item->created_at;
-            $break = 0;
-            while($duration > 0 || $break < 5 )
+
+            while($duration > 0 )
             {
                 $day = $created_at->format('Y-m-d');
                 $endOfDay = Carbon::createFromTimestamp($created_at->timestamp);
                 $endOfDay->hour = 23;
                 $endOfDay->minute = 59;
-
-                //echo "before duration: $duration<br />";
 
                 if(!isset($byDays[$day]) )
                 {
@@ -75,12 +73,7 @@ class TrackLogModel extends Model
                     ];
                     $duration = 0;
                 }
-                //echo "duration: $duration<br />";
-                //dbg($created_at, $endOfDay, $duration, $created_at->diffInMinutes($endOfDay));
-                $break++;
             }
-            //dbg();
-
         }
         return $byDays;
     }
