@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\EventTypeModel;
+use App\Http\Requests\ViewHistoryRequest;
+use App\TrackLogModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -21,8 +25,31 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( ViewHistoryRequest $request)
     {
-        return view('home');
+        $start_date = \DateTime::createFromFormat('Y-m-d', $request->get('start_date') );
+        $end_date = \DateTime::createFromFormat('Y-m-d', $request->get('end_date') );
+
+        $eventType = EventTypeModel::where('user_id', Auth::id() )->first();
+        $eventType->load('endEvent');
+
+        if(!$start_date)
+        {
+            $start_date = new \DateTime();
+            $start_date->sub( new \DateInterval('P7D') );
+        }
+
+        if(!$end_date)
+        {
+            $temp = clone $start_date;
+            $end_date = new \DateTime(  $temp->format('Y-m-d')." 23:59:00");
+            $end_date->add(new \DateInterval('P7D'));
+        }
+
+        $records = TrackLogModel::getGroupedByDay($start_date, $end_date, $eventType);
+        return view('home', [
+            'minuteSize' => 100 / (24*60),
+            'records' => $records
+        ]);
     }
 }

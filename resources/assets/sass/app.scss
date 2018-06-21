@@ -8,7 +8,43 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-.navbar-laravel {
+.main-navbar {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+
+.duration-records
+{
+
+    .log-date-row
+    {
+        padding-bottom: 4px;
+        height: 36px;
+        .log-date
+        {
+            position: relative;
+
+            float: left;
+        }
+        .time{
+            position: relative;
+            background-color: #cbcac9;
+            float: left;
+            height: 32px;
+            .time-duration
+            {
+                position: absolute;
+                background-color: #675aff;
+                top: 0;
+                height: 32px;
+                display: block;
+            }
+        }
+
+        &:after{
+            content: '';
+            clear: both;
+        }
+    }
 }
