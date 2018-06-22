@@ -48,7 +48,7 @@ class HomeController extends Controller
         foreach( $startEvents as $startEvent)
         {
             $startEvent->load('endEvent');
-            $records = array_merge($records, TrackLogModel::getGroupedByDay($start_date, $end_date, $startEvent));
+            $records = array_merge_recursive($records, TrackLogModel::getGroupedByDay($start_date, $end_date, $startEvent) );
         }
 
         return view('home', [
