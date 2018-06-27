@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::middleware('auth:api')->post('/track', ['uses' => 'TrackController@save', 'as' => 'api.track_test'] );
 Route::middleware('auth:api')->post('/track/{event_id}', ['uses' => 'TrackController@save', 'as' => 'api.track'] );
+Route::middleware('auth:api')->get('/log', ['uses' => 'HomeController@index', 'as' => 'api.log']);

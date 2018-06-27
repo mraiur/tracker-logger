@@ -51,9 +51,14 @@ class HomeController extends Controller
             $records = array_merge_recursive($records, TrackLogModel::getGroupedByDay($start_date, $end_date, $startEvent) );
         }
 
-        return view('home', [
+        $responseData = [
             'minuteSize' => 0.069444444, // 100 / (24*60)
             'records' => $records
-        ]);
+        ];
+        if( $request->ajax() )
+        {
+            return response()->json($responseData);
+        }
+        return view('home', $responseData);
     }
 }
